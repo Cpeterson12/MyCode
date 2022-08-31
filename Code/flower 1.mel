@@ -1,0 +1,15 @@
+//creates stem object
+polyCylinder -radius 1 -height 2 -subdivisionsX 20 -subdivisionsY 6 -subdivisionsZ 1 -axis 0 1 0 -rcp 0 -cuv 3 -ch 1;
+polyCylinder -e -radius 0.3 -height 20;
+select -r pCylinder2.e[115] ;//selects first edge in a loop
+select -add pCylinder2.e[100:119] ;//selects the rest
+move -r 0.285297 0 0 ;//shifts loop position
+select -r pCylinder2.e[95] ;//moves second loop
+select -add pCylinder2.e[80:99] ;
+move -r 0.504595 0 0 ;
+select -r pCylinder2.e[74] ;//selects and moves third loop
+select -add pCylinder2.e[60:79] ;
+move -r 0.512864 0 0 ;
+select -r pCylinder2.e[54] ;//selects and moves final loop
+select -add pCylinder2.e[40:59] ;
+move -r 0.223124 0 0 ;

@@ -1,0 +1,95 @@
+//I decided to create a flower for my assignement, I figured they were simple enough. I couldn't find a command to put in soft select, so in order for the code to work, it has to be turned on before it is run.
+//creates stem object
+polyCylinder -radius 1 -height 2 -subdivisionsX 20 -subdivisionsY 6 -subdivisionsZ 1 -axis 0 1 0 -rcp 0 -cuv 3 -ch 1;
+polyCylinder -e -radius 0.3 -height 20;
+select -r pCylinder1.e[115] ;//selects first edge in a loop
+select -add pCylinder1.e[100:119] ;//selects the rest
+move -r 0.285297 0 0 ;//shifts loop position
+select -r pCylinder1.e[95] ;//moves second loop
+select -add pCylinder1.e[80:99] ;
+move -r 0.504595 0 0 ;
+select -r pCylinder1.e[74] ;//selects and moves third loop
+select -add pCylinder1.e[60:79] ;
+move -r 0.512864 0 0 ;
+select -r pCylinder1.e[54] ;//selects and moves final loop
+select -add pCylinder1.e[40:59] ;
+move -r 0.223124 0 0 ;
+//creates cude for petal base
+polyCube -width 1 -height 1 -depth 1 -subdivisionsX 15 -subdivisionsY 3 -subdivisionsZ 15 -axis 0 1 0 -cuv 4 -ch 1;
+scale -r 1 0.0401306 1 ;// scales down cube on the Y
+move -r -0.621 9.947 0; //moves petal into place
+softSelect -ssd 0.8727 -sud 0.5 ;//changes the soft select intensity
+select -r pCube1.f[607] ; //selects a cube face
+move -r -0.718051 0 0 ; //stretches petal
+select -r pCube1.vtx[38] ;//selects different faces
+select -tgl pCube1.f[290] ;
+scale -r -p -0.920741cm 9.947cm 0cm 1 1 1.546049 ;//stretches the petal
+//stretches the petal some more
+select -r pCube1.e[571] ;
+select -tgl pCube1.e[314] ;
+scale -r -p -0.154333cm 9.947cm -0.00900894cm 1 1 0.501727 ;
+//changes petal shape
+select -r pCube1.f[141] ;
+move -r 0 -0.10952 0 ;
+//clones petal
+select -r pCube1 ;
+duplicate -smartTransform;
+//move clone
+select -r pCube2 ;
+move -r 1.287555 0 0;
+rotate -r -os -fo 0 179.512676 0 ;
+//next petal creation
+select -r pCube1 ;
+duplicate -smartTransform;
+select -r pCube3;
+move -r 0.646659 0 -0.612016;
+rotate -r -os -fo 0 -90.544972 0;
+//final petal
+select -r pCube3 ;
+duplicate -smartTransform;
+select -r pCube4;
+move -r 0 0 1.131653 ;
+rotate -r -os -fo 0 -179.487059 0 ;
+//creates sphere for middle of the flower
+polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r 0 9.943 0 ;
+scale -r 0.356 0.128 0.356 ;
+//starts the leaf
+polyCube -w 1 -h 1 -d 1 -sx 10 -sy 2 -sz 10 -ax 0 1 0 -cuv 4 -ch 1;
+scale -r 1 0.055 1 ;
+//selects faces to stretch
+select -tgl pCube5.f[255] ;
+select -tgl pCube5.f[254] ;
+select -tgl pCube5.f[244] ;
+select -tgl pCube5.f[245] ;
+move -r 1.29167 0 0 ;
+//second set of faces moved
+select -r pCube5.f[270] ;
+select -tgl pCube5.f[260] ;
+select -tgl pCube5.f[279] ;
+select -tgl pCube5.f[269] ;
+scale -r -p 0.488cm 4.012cm 0cm 1 1 0.555138 ;
+//third set moved
+select -r pCube5.f[7] ;
+select -tgl pCube5.f[17] ;
+select -tgl pCube5.f[137] ;
+select -tgl pCube5.f[126] ;
+scale -r -p 1.676236cm 4.012cm 0cm 1 1 1.31872 ;
+//changes soft select strength and creates indent
+softSelect -ssd 0.0915177 -sud 0.5 ;
+select -tgl pCube5.e[72] ;
+select -tgl pCube5.e[74] ;
+select -tgl pCube5.e[76] ;
+select -tgl pCube5.e[78] ;
+move -r 0 -0.0133901 0 ;
+//fine tune the leaf
+select -r pCube14.f[79] ;
+softSelect -ssd 1.044746 -sud 0.5 ;
+move -r 0 0.174617 0 ;
+select -r pCube5.f[75] ;
+move -r 0 -0.0424724 0 ;
+select -r pCube5.f[78] ;
+move -r 0 -0.0647903 0 ;
+select -r pCube5.f[83] ;
+move -r 0 -0.144084 0 ;
+move -r -0.194759 0 0 ;//slides leaf back just a bit
