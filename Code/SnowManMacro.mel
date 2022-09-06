@@ -1,4 +1,4 @@
-float $size = 5;
+float $size = 3;
 
 //creates base
 polySphere -r $size -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
