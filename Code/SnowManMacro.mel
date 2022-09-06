@@ -1,0 +1,40 @@
+float $size = 5;
+
+//creates base
+polySphere -r $size -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r -os -wd 0 $size 0;
+
+//creates body
+polySphere -r ($size / 1.5) -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r -os -wd 0 ((($size * 2) + ($size -1)) - ($size * 2) / (8)) 0;
+
+//creates head
+polySphere -r ($size / 3) -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r -os -wd 0 ((($size * 3) + ($size -1)) - ($size * 3) / (8)) 0;
+
+//creates hat
+polyCylinder -radius ($size / 3.5) -h $size -sx 20 -sy 9 -sz 1 -ax 0 1 0 -roundCap 0 -cuv 3 -ch 1;
+move -r 0 ($size * 4) 0 ;
+select -r pCylinder1.f[0:19] ;
+
+//creates brim
+polyCylinder -radius ($size / 1.1) -h ($size / 2.99) -sx 20 -sy 2 -sz 1 -ax 0 1 0 -roundCap 0 -cuv 3 -ch 1;
+scale -r .5 .30 .5;
+move -r 0 (($size * 4) * 0.883) 0 ;
+
+//creates eyes
+polySphere -r ($size / 12) -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r (($size / 3) * .4) ((($size * 3) + ($size -1)) - ($size * 3) / (8)) (($size / 3) * .7) ;
+
+polySphere -r ($size / 12) -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r ((-$size / 3) * .4) ((($size * 3) + ($size -1)) - ($size * 3) / (8)) (($size / 3) * .7) ;
+
+//creates buttons
+polySphere -r ($size / 12) -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r 0 (($size * 3) * .9) ($size / 1.7);
+
+polySphere -r ($size / 12) -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r 0 (($size * 2) * 1.15)  ($size / 1.66); 
+
+polySphere -r ($size / 12) -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;
+move -r 0 ($size * 1) ($size / 1);  

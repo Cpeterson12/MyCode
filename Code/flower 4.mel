@@ -58,7 +58,7 @@ scale -relative 0.356 0.128 0.356 ;
 polyCube -width 1 -height 1 -depth 1 -subdivisionsX 10 -subdivisionsY 2 -subdivisionsZ 10 -axis 0 1 0 -cuv 4 -ch 1;
 scale -relative 1 0.055 1 ;
 //selects faces to stretch
-select -tgl pCube5.f[255] ;
+select -toggle pCube5.f[255] ;//tgl=toggle. Toggle allows you to select more than one face
 select -tgl pCube5.f[254] ;
 select -tgl pCube5.f[244] ;
 select -tgl pCube5.f[245] ;
@@ -68,7 +68,7 @@ select -r pCube5.f[270] ;
 select -tgl pCube5.f[260] ;
 select -tgl pCube5.f[279] ;
 select -tgl pCube5.f[269] ;
-scale -r -p 0.488cm 4.012cm 0cm 1 1 0.555138 ;
+scale -relative -pivot 0.488cm 4.012cm 0cm 1 1 0.555138 ;
 //third set moved
 select -r pCube5.f[7] ;
 select -tgl pCube5.f[17] ;
