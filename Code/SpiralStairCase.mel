@@ -1,0 +1,16 @@
+
+proc CreateStairs(int $i, int $height, float $rotation, int $offset, int $width, int $depth, int $stairHeight)//this calls my function
+{
+  for ($i = 0; $i < 20; $i++)//this makes my stairs repeat until there are 20
+  {
+    polyCube -w $width -h $stairHeight -d $depth -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1;
+    xform -os -rotatePivot 0 0 $offset; //moves the pivot point of a stair to one side
+    rotate -r -os -x 0 -y $rotation -z 0;
+    move -r -x 0.739 -y $height -z 0.204;
+    $height++;
+    $rotation+= 17.25;
+  }
+}
+
+CreateStairs($i, 1, -17.25, 2, 1.5, 4.4, 1);
+//this runs the whole code. 
