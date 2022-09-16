@@ -1,5 +1,5 @@
 
-proc CreateStairs(int $i, int $height, float $rotation, int $offset, int $width, int $depth, int $stairHeight)//this calls my function
+proc CreateStairs(int $i, int $height, float $rotation, int $offset, int $width, float $depth, int $stairHeight)//this calls my function
 {
   for ($i = 0; $i < 20; $i++)//this makes my stairs repeat until there are 20
   {
@@ -12,5 +12,5 @@ proc CreateStairs(int $i, int $height, float $rotation, int $offset, int $width,
   }
 }
 
-CreateStairs($i, 1, -17.25, 2, 1.5, 4.4, 1);
-//this runs the whole code. 
+CreateStairs(0, 1, -17.25, 2, 1.5, 4.4, 1);
+//this runs the whole code.
