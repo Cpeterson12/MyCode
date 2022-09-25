@@ -1,0 +1,13 @@
+//Functions and Parameters
+
+//ex of a function in MEL. its a set of instructions. the var in the () is the parameter.
+proc SayHello(string $name, int $age)
+{
+   print ("Hello " + $name + "!\n");
+   print ("Happy Birthday! you're " + $age + " years old!");
+  
+}
+
+//this is how it's called.
+SayHello("Tim", 21); 
+//writing Tim assigns that name to the var, so the code block recogizes it.

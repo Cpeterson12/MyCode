@@ -1,0 +1,35 @@
+//Fortune Teller
+//-lottery Number
+//-Bestest Friend
+//-Fortune
+//-Zodiac Sign
+
+
+//generates a random lottery number
+proc string LotteryNumbers()
+{
+    int $values[];
+    for ($i = 0; $i < 7; $i++)
+    {
+        int $num = `rand 100`;
+        $values[size($values)] = $num;//makes it so that the array increase by 1 size each run through.
+
+
+    }
+
+    return (intArrayToString($values, " - ")); //gives a space between our string values
+}
+
+
+//Bestest Friend
+proc BestestFriend() 
+{
+    string $names[] = {"Dave", "Doug", "Clarence", "Mary", "Jane", "Tina"};
+    int $size = size($names);
+    int $randNum = `rand $size`;//gives a random number between zero and the specified range.
+
+    print ("Your new bestest friend will be named " + $names[$randNum] + "!\n");
+    //return ends the function
+}
+
+commandPort -name "localhost:7001" -sourceType "mel" -echoOutput;

@@ -1,0 +1,93 @@
+    //Calculator
+    global proc string Addition(float $x, float $y, float $z)
+    {
+     float $sum = ($x + $y + $z);
+     return string ($x + "+" + $y + "+" + $z + "=" + $sum + "\n");
+    }
+   
+
+    global proc string Subtraction(float $x, float $y, float $z)
+    {
+     float $sum = ($x - $y - $z);
+     return string ($x + "-" + $y + "-" + $z + "=" + $sum + "\n");
+    }
+ 
+    global proc string Multiplication(float $x, float $y, float $z)
+    {
+     float $sum = ($x * $y * $z);
+     return string ($x + "*" + $y + "*" + $z + "=" + $sum + "\n");
+    }
+    
+
+    global proc string Division(float $x, float $y, float $z)
+    {
+     float $sum = (($x / $y) / $z);
+     return string ($x + "/" + $y  + "/" + $z + "=" + $sum + "\n");
+    }
+   
+
+    global proc string Exponent(float $base, float $exponent)
+    {
+     float $answer = pow($base, $exponent);
+     return string ($base + " to the power of " + $exponent + " = " + $answer + "\n");
+    }
+  
+   
+
+    global proc string Mean( float $one, float $two, float $three, float $four, float $five, float $six)
+    {
+        float $array[] = {1, 2, 3, 4, 5, 6};
+        float $size = size($array);
+        float $sum = ($one + $two + $three + $four + $five + $six);
+        float $mean = ($sum / $size);
+        return string ("The mean of this set is " + $mean + "\n");
+    }
+    
+    global proc string Median(float $one, float $two, float $three, float $four, float $five, float $six)
+    {
+        float $array[] = {$one, $two, $three, $four, $five, $six};
+        $array = `sort $array`;
+       float $sum = ($array[2] + $array[3]);
+       float $answer = ($sum / 2);
+        return string ("The median of this set is " + $answer + "\n");
+    }
+   
+
+    global proc Calculator(float $valuei, float $valueii, float $valueiii, float $dataArray[], float $base, float $exponent, int $operation)
+    {
+
+        if($operation == 1)
+        {
+            print(Addition($valuei, $valueii, $valueiii));
+        }
+        else if($operation == 2)
+        {
+            print(Subtraction($valuei, $valueii, $valueiii));
+        }
+        else if($operation == 3)
+        {
+            print(Multiplication($valuei, $valueii, $valueiii));
+        }
+        else if($operation == 4)
+        {
+            print(Division($valuei, $valueii, $valueiii));
+        }
+        else if($operation == 5)
+        {
+            print(Mean($dataArray[0], $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5]));
+        }
+        else if($operation == 6)
+        {
+            print(Median($dataArray[0], $dataArray[1], $dataArray[2], $dataArray[3], $dataArray[4], $dataArray[5]));
+        }
+        else if($operation == 7)
+        {
+            print(Exponent($base, $exponent));
+        }
+        else
+        {
+            print ("Invalid operation number \n");
+        }
+    }
+    Calculator(5, 6, 12, {37, 42, 164, 97, -3, 7}, 4, 2, 5);
+

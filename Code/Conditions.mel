@@ -1,0 +1,26 @@
+//Conditions: 
+//Things that hinge off of comparisions like (5 > 3)
+
+//if statment
+if (condition)
+{
+ //curly brace is a code block
+ //if the condition is true, run the code block.
+ //a condition could also be a string value. say, $name == tim.
+}
+else if (condition)//if the other is not true, check for this instead
+{
+    //run code block if the above is true
+
+}
+
+
+
+else //if conditions above are not true.
+{
+  //run what is in the code block
+
+
+
+}
+

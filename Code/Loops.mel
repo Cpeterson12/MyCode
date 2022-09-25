@@ -1,0 +1,52 @@
+//Loops
+
+//for loop
+//statement 1: executed one time before code block - establishes a base or a variable
+//statement 2: defines a condition
+//statement 3: executed every time after the code block, no semicolon.
+for (statement 1; statement 2; statement 3)
+{
+    //code block
+}
+
+//ex:
+
+for ($i = 0; $i < 5; $i++)
+{
+    print ("Hi there!")
+}
+
+print ("Loop is done");
+
+
+//While loop
+int $i = 0;
+
+while($i < 10)
+{
+    print ("Hi there!");
+    $i+=2;
+}
+
+
+//Do. .while loop. Difference with a do is that it will always run the do, even if it is false, but then it wont run again.
+$i = 0;
+
+do
+{
+  print ($i + "\n");
+  $i++;
+}
+while ($i < 10);
+
+
+string $people[] = {"Tim", "Mark", "Mary", "Penelope"};
+  //                    0      1        2        3  
+  //size of $people is = to 4
+for($i = 0; $i < size($people); $i++)
+{
+    print ("Hello " + $people[$i] + "! I am speaking to you!" + "\n");
+}
+//this works because the $i variable represents the values of the array of names. 
+//We are also updating the variable each loop so that we call for a different name.
+//and we are stopping the loop when the variable is no longer less then the size of the array.

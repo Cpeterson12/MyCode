@@ -1,0 +1,28 @@
+//Functions Continued
+proc Test(string $name)
+{
+    print ("Hello" + $name + "!");
+}
+
+Test("Doug");
+//this is an example of a void function. it just runs the code block.
+
+proc string NamePicker()
+{
+    string $names[] = {"Dave", "Doug", "Clarence", "Mary", "Jane", "Tina"};
+    int $size = size($names);
+    int $randNum = `rand $size`;//gives a random number between zero and the specified range.
+    //print ($names[$randNum] + "\n");
+
+    return ($names[$randNum]);
+    //return ends the function
+}
+
+proc int RandomNumber(int $num)
+{
+    int $randNum = `rand $num`;
+    return ($randNum);
+}
+
+print (NamePicker() + "'s favorite number is " + RandomNumber(100) + "!\n");
+//uses returened values from my fuctions to print out a string.
