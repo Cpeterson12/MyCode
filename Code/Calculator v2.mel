@@ -1,0 +1,134 @@
+    //Calculator
+    global proc string Addition(float $numbers[])
+    {
+        float $sum = 0;
+     for ($i=0; $i<size($numbers); $i++)
+     {
+        $sum =($numbers[$i] + $sum);
+     }
+        return $sum;
+    }
+   
+    global proc string Subtraction(float $numbers[])
+    {
+        float $difference = $numbers[0];
+     for ($i=1; $i<size($numbers); $i++)
+     {
+        $difference =($difference - $numbers[$i]);
+     }
+        return $difference;
+    }
+
+
+ 
+    global proc string Multiplication(float $numbers[])
+    {
+        float $sum = $numbers[0];
+     for ($i=1; $i<size($numbers); $i++)
+     {
+        $sum =($numbers[$i] * $sum);
+     }
+        return $sum;
+    }
+    
+
+    global proc string Division(float $numbers[])
+    {
+        float $quotient = $numbers[0];
+     for ($i=1; $i<size($numbers); $i++)
+     {
+        $quotient =($quotient / $numbers[$i]);
+     }
+        return $quotient;
+    }
+   
+
+    global proc string Exponent(float $base, float $exponent)
+    {
+     float $answer = pow($base, $exponent);
+     return string ($base + " to the power of " + $exponent + " = " + $answer + "\n");
+    }
+  
+   
+
+    global proc string Mean(float $array[])
+    {
+        float $size = size($array);
+        float $sum = 0;
+        for($i = 0; $i < $size; $i++)
+        {
+            $sum = ($array[($i)] + $sum);
+        }
+        float $mean = ($sum / $size);
+        return string ("The mean of this set is " + $mean + "\n");
+    }
+
+
+    global proc string Median(float $array[])
+    {
+        
+        $array = `sort $array`;
+        float $half = size($array) % 2;
+        if ($half == 0)
+        {
+            float $sum = $array[size($array) / 2] + $array[(size($array) / 2) +1];
+            float $answer = ($sum / 2);
+            return string ("the median of this data set is " + $answer + "\n");
+        }
+        else
+        {
+           float $answer = ($array[size($array) / 2]);
+           return string ("the median of this data set is " + $answer + "\n");
+        }
+    }
+   
+
+    global proc Calculator( float $dataArray[], float $base, float $exponent, int $operation)
+    {
+        float $result;
+        string $symbol;
+
+        if($operation == 1)
+        {
+            $result = Addition($dataArray);
+            $symbol = "+";
+        }
+        else if($operation == 2)
+        {
+            $result = Subtraction($dataArray);
+            $symbol = "-";
+        }
+        else if($operation == 3)
+        {
+            $result = Multiplication($dataArray);
+            $symbol = "*";
+        }
+        else if($operation == 4)
+        {
+            $result = Division($dataArray);
+            $symbol = "/";
+        }
+        else if($operation == 5)
+        {
+            print(Mean($dataArray));
+        }
+        else if($operation == 6)
+        {
+            print(Median($dataArray));
+        }
+        else if($operation == 7)
+        {
+            print(Exponent($base, $exponent));
+        }
+        else
+        {
+            print("Invalid operation number \n");
+        }
+        string $response;
+        $sentence = "The result of ";
+        $sentence += floatArrayToString($dataArray, $symbol);
+        $sentence += "=" + $result;
+        print ($sentence);
+    }
+    Calculator({37, 42, 164, 97, -3, 7}, 4, 2, 1);
+
