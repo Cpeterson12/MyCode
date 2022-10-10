@@ -1,0 +1,16 @@
+global proc string CreateObj(float $amount, float $xValue, float $yValue, float $zValue)
+{
+
+    for ($i=0; $i<($amount); $i++)
+    {
+        float $xPlace = `rand $xValue`;
+        float $yPlace = `rand $yValue`;
+        float $zPlace = `rand $zValue`;
+        polyCube -w 2 -h 2 -d 2 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1;
+        move -r -x $xPlace -y $yPlace -z $zPlace;
+    }
+    return $amount;
+
+}
+
+CreateObj(35, 10, 10, 10);

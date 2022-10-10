@@ -1,20 +1,11 @@
-//Fortune Teller
-//-lottery Number
-//-Bestest Friend
-//-Fortune
-//-Zodiac Sign
-
-
 //generates a random lottery number
-proc string LotteryNumbers()
+global proc string LotteryNumbers()
 {
     int $values[];
     for ($i = 0; $i < 7; $i++)
     {
         int $num = `rand 100`;
         $values[size($values)] = $num;//makes it so that the array increase by 1 size each run through.
-
-
     }
 
     return (intArrayToString($values, " - ")); //gives a space between our string values
@@ -22,14 +13,60 @@ proc string LotteryNumbers()
 
 
 //Bestest Friend
-proc BestestFriend() 
+global proc BestestFriend(string $name) 
 {
     string $names[] = {"Dave", "Doug", "Clarence", "Mary", "Jane", "Tina"};
     int $size = size($names);
     int $randNum = `rand $size`;//gives a random number between zero and the specified range.
-
-    print ("Your new bestest friend will be named " + $names[$randNum] + "!\n");
+    print ($name + ", Your new bestest friend will be named " + $names[$randNum] + "!\n");
     //return ends the function
 }
 
-commandPort -name "localhost:7001" -sourceType "mel" -echoOutput;
+global proc FortuneCookie()
+{
+    string $fortunes[] = {"The greatest risk is not taking one.",
+                           "Be on the lookout for coming events; They cast their shadows beforehand.",
+                           "Love can last a lifetime, if you want it to.",
+                           "You learn from your mistakes... You will learn a lot today.",
+                           "Serious trouble will bypass you."};
+    
+    int $randNum = `rand (size($fortunes))`;//think pemdas. we find fortunes size, then randomize.
+    print ($fortunes[$randNum] + "\n");
+}
+
+global proc string Zodiac(int $birthYear)
+{
+   string $signs[] = {"Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Sheep", "Monkey", "Rooster", "Dog", "Pig"};
+
+   int $index = ($birthYear - 4) % 12; //% gives us a remainder
+
+   return $signs[$index]; //taking the assigned number from index, and correlating it to signs.
+   
+}
+
+
+global proc FortuneTeller(string $myName, int $myBirthYear, int $operation)
+{
+    if ($operation == 1)
+    {
+        print ("Your lucky numbers for today are " + LotteryNumbers() + "\n"); 
+    }
+    else if($operation == 2)
+    {   
+        BestestFriend($myName);
+    }
+    else if ($operation == 3)
+    {
+        FortuneCookie();
+    }
+    else if ($operation == 4)
+    {
+       print ("Based on your birth year, " + $myBirthYear + ", your zodiac sign is " +  Zodiac($myBirthYear) + "\n");
+    }
+    else
+    {
+        print ("Please input a valid operation type as a value, 1 through 4.");
+    }
+}
+
+FortuneTeller("Caden", 2001, 3);
