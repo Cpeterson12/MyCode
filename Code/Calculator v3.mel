@@ -6,7 +6,7 @@
      {
         $sum =($numbers[$i] + $sum);
      }
-        return $sum;
+        return (string) $sum;
     }
    
     global proc string Subtraction(float $numbers[])
@@ -122,36 +122,44 @@
         }
         else
         {
-            print("Invalid operation number \n");
+            return("Invalid operation number \n");
         }
         string $response;
         $sentence = "The result of ";
         $sentence += floatArrayToString($dataArray, $symbol);
         $sentence += "=" + $result;
-        print ($sentence);
+        return ($sentence);
     }
     //Calculator({37, 42, 164, 97, -3, 7}, 4, 2, 7);
 
     global proc CalcButtonCmd()
     {
+        //print("this is working");
         float $array[];
         float $exArray[];
+        string $Iarray[];
+        string $Earray[];
 
         string $inputField = `optionVar -q "OpNumbers"`;
         string $exponField = `optionVar -q "ExNumbers"`;
-        string $operaField = `optionVar -q "CalcOperation"`;
         string $resultField = `optionVar -q "Result"`;
+        string $rCollection = `optionVar -q -select "Buttons"`;
 
-        string $inputs = `floatField -q -value $inputField`;
-        float $fInputs = (float)$inputs;
-        string $exponents = `floatField -q -value $exponField`;
-        float $fexpon = (float)$exponents;
-        string $opers = `radioButtonGrp -q -select $operaField`;
+        string $inputs = `textField -q $inputField`;
+        tokenizeList( $inputs, $Iarray );
+       for($i = 0; $i < (size($Iarray)); $i++)
+       {
+         floatArrayInsertAtIndex((size($array)), $array, (float)$Iarray[$i]);
+       }
+        string $exponents = `textField -q $exponField`;
+        tokenizeList($exponents, $Earray);
+         for($i = 0; $i < (size($Earray)); $i++)
+       {
+         floatArrayInsertAtIndex((size($exArray)), $exArray, (float)$Earray[$i]);
+       }
+        string $rBtns = `radioCollection -q -select $rCollection`;
         
-        $array = {$fInputs};
-        $exArray = {$fexpon};
-
-        string $store = Calculator({$array}, $exArray[0], $exArray[1], $opers);
+        string $store = Calculator($array, $exArray[0], $exArray[1], $rBtns);
         textField -e -text $store $resultField;
     }
 
@@ -167,12 +175,20 @@
                         -resizeToFitChildren 1
                         $mWindow`;
         string $mColumn = `columnLayout -parent $mWindow -adjustableColumn 1`;
-        optionVar -stringValue "OpNumbers" `textField -parent $mColumn -placeholderText "Enter values here"`;
-        optionVar -stringValue "ExNumbers" `textField -parent $mColumn -placeholderText "Enter base and exponent"`;
-        optionVar -stringValue "CalcOperation" `radioButtonGrp -parent $mColumn -numberOfRadioButtons 4 -labelArray4 "Addition" "Subtraction" "Multiplication" "Division"`;
-        optionVar -stringValue "CalcOperation" `radioButtonGrp -parent $mColumn-numberOfRadioButtons 3 -labelArray3 "Mean" "Median" "Exponent"`;
+        optionVar -stringValue "OpNumbers" `textField -parent $mColumn -placeholderText "0, 0, 0"`;
+        optionVar -stringValue "ExNumbers" `textField -parent $mColumn -placeholderText "0, 0"`;
+        string $rCollection = `radioCollection -parent $mColumn`;
+        optionVar -stringValue "Buttons" $rCollection;
+        radioButton -parent $mColumn -collection $rCollection -label "Add";
+        radioButton -parent $mColumn -collection $rCollection -label "Subtract";
+        radioButton -parent $mColumn -collection $rCollection -label "Multiply";
+        radioButton -parent $mColumn -collection $rCollection -label "Divide";
+        radioButton -parent $mColumn -collection $rCollection -label "Mean";
+        radioButton -parent $mColumn -collection $rCollection -label "Median";
+        radioButton -parent $mColumn -collection $rCollection -label "Exponent";
+        
         optionVar -stringValue "Result" `textField -parent $mColumn -editable 0`;
-        button -parent $mColumn -label "ENTER" -command "global proc CalcButtonCmd()";
+        button -parent $mColumn -label "ENTER" -command "CalcButtonCmd()";
 
         showWindow $mWindow;
     }    

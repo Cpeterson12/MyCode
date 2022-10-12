@@ -10,7 +10,7 @@
 
     float $sum = $value1 + $value2;
 
-    floatField -e value $sum $field3;
+    floatField -e -value $sum $field3;
     textField -e -text ("the sum of " + $value1 + "and " + $value2 + " is " + $sum + ".") $field4;
  }
 

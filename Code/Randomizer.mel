@@ -1,16 +1,68 @@
-global proc string CreateObj(float $amount, float $xValue, float $yValue, float $zValue)
+global proc string CreateObj(float $amount, float $xMax, float $yMax, float $zMax, float $xMin, float $yMin, float $zMin)
 {
 
     for ($i=0; $i<($amount); $i++)
     {
-        float $xPlace = `rand $xValue`;
-        float $yPlace = `rand $yValue`;
-        float $zPlace = `rand $zValue`;
-        polyCube -w 2 -h 2 -d 2 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1;
-        move -r -x $xPlace -y $yPlace -z $zPlace;
+        
+        float $xPlace = `rand $xMax $xMin`;
+        float $yPlace = `rand $yMax $yMin`;
+        float $zPlace = `rand $zMax $zMin`;
+        
+        duplicate;
+        move -ws -x $xPlace -y $yPlace -z $zPlace;
     }
     return $amount;
 
 }
 
-CreateObj(35, 10, 10, 10);
+//CreateObj(35, 10, 10, 10, -10, -10, -10);
+
+global proc RandButtonCmd()
+{
+    string $ObjField = `optionVar -q "amountofObjs"`;
+    string $xField1 = `optionVar -q "Xmax"`;
+    string $yField1 = `optionVar -q "Ymax"`;
+    string $zField1 = `optionVar -q "Zmax"`;
+
+    string $xField2 = `optionVar -q "Xmin"`;
+    string $yField2 = `optionVar -q "Ymin"`;
+    string $zField2 = `optionVar -q "Zmin"`;
+
+    float $numberofObjs = `floatField -q -value $ObjField`;
+    float $maxXvalue = `floatField -q -value $xField1`;
+    float $maxYvalue = `floatField -q -value $yField1`;
+    float $maxZvalue = `floatField -q -value $zField1`;
+    float $minXvalue = `floatField -q -value $xField2`;
+    float $minYvalue = `floatField -q -value $yField2`;
+    float $minZvalue = `floatField -q -value $zField2`;
+
+
+}
+
+global proc RandomizerUI()
+{
+    string $mainWindow = "randomizerWindow";
+    if(`window -exists $mainWindow`)
+    deleteUI $mainWindow;
+    
+    
+
+    $mainWindow = `window -title "Randomizer" 
+                        -widthHeight 300 400
+                        -resizeToFitChildren 1
+                        $mainWindow`;
+    string $mColumn = `columnLayout -parent $mainWindow -adjustableColumn 1`;
+        optionVar -stringValue "amountofObjs" `textField -parent $mColumn -placeholderText "Enter amount of Objects here"`;
+        optionVar -stringValue "Xmax" `textField -parent $mColumn -placeholderText "Enter X min position"`;
+        optionVar -stringValue "Ymax" `textField -parent $mColumn -placeholderText "Enter Y min position"`;
+        optionVar -stringValue "Zmax" `textField -parent $mColumn -placeholderText "Enter Z min position"`;
+       
+        optionVar -stringValue "Xmin" `textField -parent $mColumn -placeholderText "Enter X min position"`;
+        optionVar -stringValue "Ymin" `textField -parent $mColumn -placeholderText "Enter Y min position"`;
+        optionVar -stringValue "Zmin" `textField -parent $mColumn -placeholderText "Enter Z min position"`;
+        button -parent $mColumn -label "ENTER" -command RandButtonCmd;
+
+    showWindow $mainWindow;
+}
+
+RandomizerUI();
