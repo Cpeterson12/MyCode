@@ -82,11 +82,11 @@
         }
     }
    
-
     global proc string Calculator( float $dataArray[], float $base, float $exponent, int $operation)
     {
         float $result;
         string $symbol;
+        print $dataArray;
 
         if($operation == 1)
         {
@@ -143,23 +143,23 @@
         string $inputField = `optionVar -q "OpNumbers"`;
         string $exponField = `optionVar -q "ExNumbers"`;
         string $resultField = `optionVar -q "Result"`;
-        string $rCollection = `optionVar -q -select "Buttons"`;
+        string $rCollection = `optionVar -q "Buttons"`;
 
-        string $inputs = `textField -q $inputField`;
+        string $inputs = `textField -q -text $inputField`;
         tokenizeList( $inputs, $Iarray );
        for($i = 0; $i < (size($Iarray)); $i++)
        {
-         floatArrayInsertAtIndex((size($array)), $array, (float)$Iarray[$i]);
+         $array[$i] = (float)$Iarray[$i];
        }
-        string $exponents = `textField -q $exponField`;
+        string $exponents = `textField -q -text $exponField`;
         tokenizeList($exponents, $Earray);
          for($i = 0; $i < (size($Earray)); $i++)
        {
-         floatArrayInsertAtIndex((size($exArray)), $exArray, (float)$Earray[$i]);
+         $exArray[$i] = (float)$Earray[$i];
        }
         string $rBtns = `radioCollection -q -select $rCollection`;
-        
-        string $store = Calculator($array, $exArray[0], $exArray[1], $rBtns);
+        string $operation = `radioButton -q -data $rBtns`;
+        string $store = Calculator($array, $exArray[0], $exArray[1], $operation);
         textField -e -text $store $resultField;
     }
 
@@ -179,13 +179,13 @@
         optionVar -stringValue "ExNumbers" `textField -parent $mColumn -placeholderText "0, 0"`;
         string $rCollection = `radioCollection -parent $mColumn`;
         optionVar -stringValue "Buttons" $rCollection;
-        radioButton -parent $mColumn -collection $rCollection -label "Add";
-        radioButton -parent $mColumn -collection $rCollection -label "Subtract";
-        radioButton -parent $mColumn -collection $rCollection -label "Multiply";
-        radioButton -parent $mColumn -collection $rCollection -label "Divide";
-        radioButton -parent $mColumn -collection $rCollection -label "Mean";
-        radioButton -parent $mColumn -collection $rCollection -label "Median";
-        radioButton -parent $mColumn -collection $rCollection -label "Exponent";
+        radioButton -parent $mColumn -collection $rCollection -label "Add" -data 1;
+        radioButton -parent $mColumn -collection $rCollection -label "Subtract" -data 2;
+        radioButton -parent $mColumn -collection $rCollection -label "Multiply"-data 3;
+        radioButton -parent $mColumn -collection $rCollection -label "Divide" -data 4;
+        radioButton -parent $mColumn -collection $rCollection -label "Mean" -data 5;
+        radioButton -parent $mColumn -collection $rCollection -label "Median" -data 6;
+        radioButton -parent $mColumn -collection $rCollection -label "Exponent" -data 7;
         
         optionVar -stringValue "Result" `textField -parent $mColumn -editable 0`;
         button -parent $mColumn -label "ENTER" -command "CalcButtonCmd()";

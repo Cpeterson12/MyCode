@@ -1,0 +1,11 @@
+
+string $sels[] = `ls -sl`;
+string $clusterArray[] = `cluster $sels`;
+string $cluster = $clusterArray[1];
+
+float $pos[] = `xform -q -ws -rotatepivot $cluster`;
+
+string $loc[] = `spaceLocator`;
+ 
+xform -ws -translation $pos[0] $pos[1] $pos[2] $loc;
+delete $cluster;

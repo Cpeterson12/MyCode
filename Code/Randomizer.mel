@@ -35,6 +35,8 @@ global proc RandButtonCmd()
     float $minXvalue = `floatField -q -value $xField2`;
     float $minYvalue = `floatField -q -value $yField2`;
     float $minZvalue = `floatField -q -value $zField2`;
+   print(CreateObj($numberofObjs, $maxXvalue, $maxYvalue, $maxZvalue, $minXvalue, $minYvalue, $minZvalue));
+   
 
 
 }
@@ -52,14 +54,14 @@ global proc RandomizerUI()
                         -resizeToFitChildren 1
                         $mainWindow`;
     string $mColumn = `columnLayout -parent $mainWindow -adjustableColumn 1`;
-        optionVar -stringValue "amountofObjs" `textField -parent $mColumn -placeholderText "Enter amount of Objects here"`;
-        optionVar -stringValue "Xmax" `textField -parent $mColumn -placeholderText "Enter X min position"`;
-        optionVar -stringValue "Ymax" `textField -parent $mColumn -placeholderText "Enter Y min position"`;
-        optionVar -stringValue "Zmax" `textField -parent $mColumn -placeholderText "Enter Z min position"`;
+        optionVar -stringValue "amountofObjs" `floatField -parent $mColumn`;
+        optionVar -stringValue "Xmax" `floatField -parent $mColumn`;
+        optionVar -stringValue "Ymax" `floatField -parent $mColumn`;
+        optionVar -stringValue "Zmax" `floatField -parent $mColumn`;
        
-        optionVar -stringValue "Xmin" `textField -parent $mColumn -placeholderText "Enter X min position"`;
-        optionVar -stringValue "Ymin" `textField -parent $mColumn -placeholderText "Enter Y min position"`;
-        optionVar -stringValue "Zmin" `textField -parent $mColumn -placeholderText "Enter Z min position"`;
+        optionVar -stringValue "Xmin" `floatField -parent $mColumn`;
+        optionVar -stringValue "Ymin" `floatField -parent $mColumn`;
+        optionVar -stringValue "Zmin" `floatField -parent $mColumn`;
         button -parent $mColumn -label "ENTER" -command RandButtonCmd;
 
     showWindow $mainWindow;
